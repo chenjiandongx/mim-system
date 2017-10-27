@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}医药管理信息系统 - {{ title }}{% endblock %}
+
+{% block content %}
+<form class="form-horizontal">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+        </div>
+    {% endfor %}
+    <h1>经办人信息录入</h1><br>
+    <div class="form-group">
+        <label for="aname" class="col-sm-2 control-label">姓名</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="aname" name="aname" value="{{ agency_info.aname }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="asex" class="col-sm-2 control-label">性别</label>
+        <div class="col-sm-6" id="asex">
+            <label class="radio-inline">
+                <input type="radio" id="male" name="asex" value="男" checked> 男
+            </label>
+            <label class="radio-inline">
+                <input type="radio" id="female" name="asex" value="女"> 女
+            </label>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="aphone" class="col-sm-2 control-label">电话</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="aphone" name="aphone" value="{{ agency_info.aphone }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="aremark" class="col-sm-2 control-label">备注</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" rows="3" id="aremark" name="aremark" ></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" FORMMETHOD="post">提交</button>
+        </div>
+    </div>
+</form>
+{{ super() }}
+{% endblock %}

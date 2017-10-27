@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="login">
+        <div class="page-header" align="left">
+            <h1>系统登录</h1>
+        </div>
+        {% for message in get_flashed_messages() %}
+            <div class="alert alert-warning">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    {{ message }}
+            </div>
+        {% endfor %}
+        <div class="col-md-4">
+            {{ wtf.quick_form(form, button_map={'submit': 'primary'}) }}
+        </div>
+    </div>
+{% endblock %}

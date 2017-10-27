@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="queryTable">
+    <h1>药品信息查询</h1><br>
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="mQuery"></label>
+            <input type="text" class="form-control" id="mQuery" name="mQuery">
+        </div>
+        <select class="form-control" name="queryBy">
+          <option>搜编号</option>
+          <option>搜名称</option>
+        </select>
+        <button type="submit" class="btn btn-primary">查询</button>
+    </form>
+    <br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>名称</th>
+                <th>服用方法</th>
+                <th>功效</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for form in forms %}
+                <tr>
+                    <td>{{ form.mno }}</td>
+                    <td>{{ form.mname }}</td>
+                    <td>{{ form.mmode }}</td>
+                    <td>{{ form.mefficacy }}</td>
+                    <td>
+                        <a href="{{ url_for('edit_medicine', id=form.mno) }}"><span class="label label-primary">编辑</span> </a>
+                        <a href="#"><span class="label label-primary">删除</span> </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

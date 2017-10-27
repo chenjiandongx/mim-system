@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title %}医药管理信息系统 - {{ title }}{% endblock %}
+
+{% block content %}
+<form class="form-horizontal">
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+        </div>
+    {% endfor %}
+    <h1>顾客信息录入</h1><br>
+    <div class="form-group">
+        <label for="cname" class="col-sm-2 control-label">姓名</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="cname" name="cname" value="{{ client_info.cname }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="csex" class="col-sm-2 control-label">性别</label>
+        <div class="col-sm-6" id="csex">
+            <label class="radio-inline">
+                <input type="radio" id="male" name="csex" value="男" checked> 男
+            </label>
+            <label class="radio-inline">
+                <input type="radio" id="female" name="csex" value="女"> 女
+            </label>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="cage" class="col-sm-2 control-label">年龄</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="cage" name="cage" value="{{ client_info.cage }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="caddress" class="col-sm-2 control-label">住址</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="caddress" name="caddress" value="{{ client_info.caddress }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cphone" class="col-sm-2 control-label">电话</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="cphone" name="cphone" value="{{ client_info.cphone }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="csymptom" class="col-sm-2 control-label">症状</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="csymptom" name="csymptom" value="{{ client_info.csymptom }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="ano" class="col-sm-2 control-label">经办人</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="ano" name="ano" value="{{ client_info.ano }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="mno" class="col-sm-2 control-label">已购药品</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id="mno" name="mno" value="{{ client_info.mno }}" required>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="cremark" class="col-sm-2 control-label">备注</label>
+        <div class="col-sm-6">
+            <textarea class="form-control" rows="3" id="cremark" name="cremark"></textarea>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-primary" formmethod="post">提交</button>
+        </div>
+    </div>
+</form>
+{{ super() }}
+{% endblock %}

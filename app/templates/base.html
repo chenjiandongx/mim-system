@@ -1,0 +1,59 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}医药管理信息系统 - {{ title }}{% endblock %}
+{% block head %}
+    {{super()}}
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+{% endblock %}
+
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">医药管理信息系统</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('home') }}">首页</a> </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">信息录入</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('insert_client') }}">顾客</a> </li>
+                            <li><a href="{{ url_for('insert_agency') }}">经办人</a> </li>
+                            <li><a href="{{ url_for('insert_medicine') }}">药品</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">信息查询</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="{{ url_for('query_client') }}">顾客</a> </li>
+                            <li><a href="{{ url_for('query_agency') }}">经办人</a> </li>
+                            <li><a href="{{ url_for('query_medicine') }}">药品</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="{{ url_for('logout') }}">注销</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    {% block footer %}
+        <footer class="container-fluid foot-wrap">
+            <p align="center" style="margin-top: 20px;color:#878B91;">
+                Copyright &copy; 2017 chenjiandongx
+            </p>
+        </footer>
+    {% endblock %}
+{% endblock %}
+

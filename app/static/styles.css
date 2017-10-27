@@ -1,0 +1,23 @@
+form.form-horizontal{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 40px;
+}
+div.login{
+    margin-left: 15%;
+    margin-right: 15%;
+    margin-top: 5%;
+}
+div.queryTable {
+    margin-top: 30px;
+    margin-left: 15%;
+    margin-right: 15%
+}
+div.errorInfo {
+    margin-top:5%;
+    margin-left: 15%;
+}
+
+div.errorInfo > h1 {
+    font-size: 300%
+}

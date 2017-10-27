@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="queryTable">
+    <h1>经办人信息查询</h1><br>
+    <form class="form-inline">
+        <div class="form-group">
+            <label class="sr-only" for="aQuery"></label>
+            <input type="text" class="form-control" id="aQuery" name="aQuery">
+        </div>
+        <select class="form-control" name="queryBy">
+          <option>搜编号</option>
+          <option>搜姓名</option>
+        </select>
+        <button type="submit" class="btn btn-primary">查询</button>
+    </form>
+    <br>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>电话</th>
+                <th>备注</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for form in forms %}
+            <tr>
+                <td>{{ form.ano }}</td>
+                <td>{{ form.aname }}</td>
+                <td>{{ form.asex }}</td>
+                <td>{{ form.aphone }}</td>
+                <td>{{ form.aremark }}</td>
+                <td>
+                    <a href="{{ url_for('edit_agency', id=form.ano) }}"><span class="label label-primary">编辑</span> </a>
+                    <a href="#"><span class="label label-primary">删除</span> </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
