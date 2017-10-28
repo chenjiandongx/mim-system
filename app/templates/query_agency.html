@@ -3,6 +3,12 @@
 {% block content %}
 <div class="queryTable">
     <h1>经办人信息查询</h1><br>
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+                {{ message }}
+        </div>
+    {% endfor %}
     <form class="form-inline">
         <div class="form-group">
             <label class="sr-only" for="aQuery"></label>
@@ -36,7 +42,7 @@
                 <td>{{ form.aremark }}</td>
                 <td>
                     <a href="{{ url_for('edit_agency', id=form.ano) }}"><span class="label label-primary">编辑</span> </a>
-                    <a href="#"><span class="label label-primary">删除</span> </a>
+                    <a href="{{ url_for('delete_agency', id=form.ano) }}"><span class="label label-primary">删除</span> </a>
                 </td>
             </tr>
         {% endfor %}

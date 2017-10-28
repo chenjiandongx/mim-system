@@ -23,6 +23,7 @@
                 <th>性别</th>
                 <th>年龄</th>
                 <th>电话</th>
+                <th>录入日期</th>
                 <th>经办人编号</th>
                 <th>药品编号</th>
                 <th>备注</th>
@@ -37,12 +38,13 @@
                 <td>{{ form.csex }}</td>
                 <td>{{ form.cage }}</td>
                 <td>{{ form.cphone }}</td>
+                <td>{{ form.cdate.strftime('%Y-%m-%d %H:%M:%S') }}</td>
                 <td><a href="{{ url_for('query_agency', queryBy='搜编号', aQuery=form.ano) }}">{{ form.ano }}</a></td>
                 <td><a href="{{ url_for('query_medicine', queryBy='搜编号', mQuery=form.mno) }}">{{ form.mno }}</a></td>
                 <td>{{ form.cremark }}</td>
                 <td>
                     <a href="{{ url_for('edit_client', id=form.cno) }}"><span class="label label-primary">编辑</span> </a>
-                    <a href="#"><span class="label label-primary">删除</span> </a>
+                    <a href="{{ url_for('delete_client', id=form.cno) }}"><span class="label label-primary">删除</span> </a>
                 </td>
             </tr>
         {% endfor %}

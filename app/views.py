@@ -299,23 +299,45 @@ def query_medicine():
 
 @app.route("/delete-client/<int:id>")
 def delete_client(id):
+    """ 删除客户
+
+    :param id: 客户编号
+    """
     query = Client.query.filter_by(cno=id).first()
     db.session.delete(query)
     db.session.commit()
+    return redirect(url_for("query_client", cQuery=id, queryBy="搜编号"))
 
 
 @app.route("/delete-agency/<int:id>")
 def delete_agency(id):
+    """ 删除经办人
+
+    :param id: 经办人编号
+    """
     query = Agency.query.filter_by(ano=id).first()
-    db.session.delete(query)
-    db.session.commit()
+    if Client.query.filter_by(ano=query.ano):
+        flash("该`经办人`存在主外键关系限制，无法删除！")
+    else:
+        db.session.delete(query)
+        db.session.commit()
+
+    return redirect(url_for("query_agency", aQuery=id, queryBy="搜编号"))
 
 
 @app.route("/delete-medicine/<int:id>")
 def delete_medicine(id):
+    """ 删除药品
+
+    :param id: 药品编号
+    """
     query = Medicine.query.filter_by(mno=id).first()
-    db.session.delete(query)
-    db.session.commit()
+    if Client.query.filter_by(mno=query.mno):
+        flash("该`药品`存在主外键关系限制，无法删除！")
+    else:
+        db.session.delete(query)
+        db.session.commit()
+    return redirect(url_for("query_medicine", mQuery=id, queryBy="搜编号"))
 
 
 @app.errorhandler(401)
