@@ -21,3 +21,8 @@ div.errorInfo {
 div.errorInfo > h1 {
     font-size: 300%
 }
+
+.my-charts {
+    padding-left: 8%;
+    padding-top: 2%;
+}

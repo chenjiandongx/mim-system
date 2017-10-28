@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}医药管理信息系统 - {{ title }}{% endblock %}
-
 {% block content %}
 <form class="form-horizontal">
     {% for message in get_flashed_messages() %}
@@ -34,7 +32,7 @@
     <div class="form-group">
         <label for="mefficacy" class="col-sm-2 control-label">功效</label>
         <div class="col-sm-6">
-            <textarea class="form-control" rows="3" id="mefficacy" name="mefficacy" required></textarea>
+            <input type="text" class="form-control" id="mefficacy" name="mefficacy" value="{{ medicine_info.mefficacy }}" required>
         </div>
     </div>
 

@@ -2,30 +2,33 @@ import datetime
 
 from flask import render_template, url_for, request, flash, redirect
 from manage import app, db
+from flask_login import login_user, login_required, logout_user
+from app.config import FLASK_ADMIN_USERNAME, FLASK_ADMIN_PASSWORD
 from .models import Medicine, Agency, Client
 from .user import User
 from .forms import LoginForm
-from flask_login import login_user, login_required, logout_user
-from app.config import FLASK_ADMIN_USERNAME, FLASK_ADMIN_PASSWORD
+from pyecharts import Line
 
 
 @app.route("/home", methods=["POST", "GET"])
-@login_required
 def home():
+    """ 首页
+    """
     return render_template("home.html", title="首页")
 
 
 @app.route('/', methods=["POST", "GET"])
 def login():
+    """ 登录账户
+    """
     form = LoginForm()
     if form.validate_on_submit():
         if form.username.data == FLASK_ADMIN_USERNAME and \
            form.password.data == FLASK_ADMIN_PASSWORD:
             login_user(user=User(FLASK_ADMIN_USERNAME), remember=True)
             return redirect(url_for("home"))
-        else:
-            flash("账号或密码错误！")
-            return redirect(url_for("login"))
+        flash("账号或密码错误！")
+        return redirect(url_for("login"))
     return render_template("login.html", title="登录", form=form)
 
 
@@ -41,6 +44,8 @@ def logout():
 
 @app.route("/insert-client", methods=["POST", "GET"])
 def insert_client():
+    """ 新增客户
+    """
     if request.method == "POST":
         cname = request.values.get("cname")
         csex = request.values.get("csex")
@@ -94,6 +99,8 @@ def insert_client():
 
 @app.route("/insert-agency", methods=["POST", "GET"])
 def insert_agency():
+    """ 新增经办人
+    """
     if request.method == "POST":
         aname = request.values.get("aname")
         asex = request.values.get("asex")
@@ -119,6 +126,8 @@ def insert_agency():
 
 @app.route("/insert-medicine", methods=["POST", "GET"])
 def insert_medicine():
+    """ 新增药品
+    """
     if request.method == "POST":
         mname = request.values.get("mname")
         mmode = request.values.get("mmode")
@@ -142,6 +151,10 @@ def insert_medicine():
 
 @app.route("/insert-client/<int:id>", methods=["POST", "GET"])
 def edit_client(id):
+    """ 编辑客户
+
+    :param id: 客户编号
+    """
     _client = Client.query.filter_by(cno=id).first()
     cname = _client.cname
     csex = _client.csex
@@ -149,6 +162,9 @@ def edit_client(id):
     caddress = _client.caddress
     cphone = _client.cphone
     csymptom = _client.csymptom
+    ano = _client.ano
+    mno = _client.mno
+    cremark = _client.cremark
 
     if request.method == "POST":
         cname = request.values.get("cname")
@@ -191,16 +207,24 @@ def edit_client(id):
                                "cage": cage,
                                "caddress": caddress,
                                "cphone": cphone,
-                               "csymptom": csymptom
+                               "csymptom": csymptom,
+                               "ano": ano,
+                               "mno": mno,
+                               "cremark": cremark
                            })
 
 
 @app.route("/insert-agency/<int:id>", methods=["POST", "GET"])
 def edit_agency(id):
+    """ 编辑经办人
+
+    :param id: 经办人编号
+    """
     _agency = Agency.query.filter_by(ano=id).first()
     aname = _agency.aname
     asex = _agency.asex
     aphone = _agency.aphone
+    aremark = _agency.aremark
 
     if request.method == "POST":
         aname = request.values.get("aname")
@@ -220,12 +244,17 @@ def edit_agency(id):
                            agency_info={
                                "aname": aname,
                                "asex": asex,
-                               "aphone": aphone
+                               "aphone": aphone,
+                               "aremark": aremark
                            })
 
 
 @app.route("/edit-medicine/<int:id>", methods=["POST", "GET"])
 def edit_medicine(id):
+    """ 编辑药品
+
+    :param id: 药品编号
+    """
     _medicine = Medicine.query.filter_by(mno=id).first()
     mname = _medicine.mname
     mmode = _medicine.mmode
@@ -253,6 +282,8 @@ def edit_medicine(id):
 
 @app.route("/query-client", methods=["POST", "GET"])
 def query_client():
+    """ 查询客户
+    """
     query = request.values.get("cQuery")
     if query == "#all":
         client = Client.query.all()
@@ -268,6 +299,8 @@ def query_client():
 
 @app.route("/query-agency", methods=["POST", "GET"])
 def query_agency():
+    """ 查询经办人
+    """
     query = request.values.get("aQuery")
     if query == "#all":
         agency = Agency.query.all()
@@ -283,6 +316,8 @@ def query_agency():
 
 @app.route("/query-medicine", methods=["POST", "GET"])
 def query_medicine():
+    """ 查询药品
+    """
     query = request.values.get("mQuery")
     if query == "#all":
         medicine = Medicine.query.all()
@@ -306,6 +341,7 @@ def delete_client(id):
     query = Client.query.filter_by(cno=id).first()
     db.session.delete(query)
     db.session.commit()
+    flash("该`客户`删除成功！")
     return redirect(url_for("query_client", cQuery=id, queryBy="搜编号"))
 
 
@@ -338,6 +374,22 @@ def delete_medicine(id):
         db.session.delete(query)
         db.session.commit()
     return redirect(url_for("query_medicine", mQuery=id, queryBy="搜编号"))
+
+
+@app.route("/data-statistics")
+def data_statistics():
+    """ 数据统计
+    """
+    acount = len(Agency.query.all())
+    ccount = len(Client.query.all())
+    mcount = len(Medicine.query.all())
+
+    line = Line("数据统计折线图", width=1100, height=550)
+    line.add("", ["药品数", "经办人数", "顾客数"],
+             [mcount, acount, ccount], is_more_utils=True)
+    return render_template('pyecharts.html',
+                           myechart=line.render_embed(),
+                           script_list=line.get_js_dependencies())
 
 
 @app.errorhandler(401)

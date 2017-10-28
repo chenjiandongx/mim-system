@@ -1,7 +1,5 @@
 {% extends "base.html" %}
 
-{% block title %}医药管理信息系统 - {{ title }}{% endblock %}
-
 {% block content %}
 <form class="form-horizontal">
     {% for message in get_flashed_messages() %}
@@ -76,7 +74,7 @@
     <div class="form-group">
         <label for="cremark" class="col-sm-2 control-label">备注</label>
         <div class="col-sm-6">
-            <textarea class="form-control" rows="3" id="cremark" name="cremark"></textarea>
+            <input type="text" class="form-control" id="cremark" name="cremark" value="{{ client_info.cremark }}">
         </div>
     </div>
 

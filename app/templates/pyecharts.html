@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {{super()}}
+	{% for jsfile_name in script_list %}
+        <script src="static/{{ jsfile_name }}.js"></script>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+    <div class="my-charts">
+        {{ myechart|safe }}
+    </div>
+{% endblock %}
