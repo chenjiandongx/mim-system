@@ -10,8 +10,6 @@ class Agency(db.Model):
     aphone = db.Column(db.String)
     aremark = db.Column(db.String)
 
-    client = db.relationship("Client", backref="agencies", lazy="dynamic")
-
     def __repr__(self):
         return '<Agency {}>'.format(self.ano)
 
@@ -23,8 +21,6 @@ class Medicine(db.Model):
     mname = db.Column(db.String)
     mmode = db.Column(db.String)
     mefficacy = db.Column(db.String)
-
-    client = db.relationship("Client", backref="medicines", lazy="dynamic")
 
     def __repr__(self):
         return '<Medicine {}>'.format(self.mno)
@@ -43,7 +39,14 @@ class Client(db.Model):
     cdate = db.Column(db.DateTime)
     cremark = db.Column(db.String)
 
+    # 与 Medicine 建立主外键关系
+    medicine = db.relationship("Medicine",
+                               backref=db.backref("clients", lazy=True))
     mno = db.Column(db.Integer, db.ForeignKey("medicines.mno"))
+
+    # 与 Agency 建立主外键关系
+    agencies = db.relationship("Agency",
+                               backref=db.backref("clients", lazy=True))
     ano = db.Column(db.Integer, db.ForeignKey("agencies.ano"))
 
     def __repr__(self):
