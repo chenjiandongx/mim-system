@@ -24,7 +24,7 @@ class Medicine(db.Model):
     mmode = db.Column(db.String)
     mefficacy = db.Column(db.String)
 
-    client = db.relationship("Client", backref="medicines ", lazy="dynamic")
+    client = db.relationship("Client", backref="medicines", lazy="dynamic")
 
     def __repr__(self):
         return '<Medicine {}>'.format(self.mno)
