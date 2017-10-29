@@ -43,8 +43,8 @@ class Client(db.Model):
     cdate = db.Column(db.DateTime)
     cremark = db.Column(db.String)
 
-    mno = db.Column(db.String, db.ForeignKey("medicines.mno"))
-    ano = db.Column(db.String, db.ForeignKey("agencies.ano"))
+    mno = db.Column(db.Integer, db.ForeignKey("medicines.mno"))
+    ano = db.Column(db.Integer, db.ForeignKey("agencies.ano"))
 
     def __repr__(self):
         return '<Client {}>'.format(self.cno)
