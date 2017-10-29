@@ -41,12 +41,12 @@ class Client(db.Model):
 
     # 与 Medicine 建立主外键关系
     medicine = db.relationship("Medicine",
-                               backref=db.backref("clients", lazy=True))
+                               backref=db.backref("client", lazy=True))
     mno = db.Column(db.Integer, db.ForeignKey("medicines.mno"))
 
     # 与 Agency 建立主外键关系
     agencies = db.relationship("Agency",
-                               backref=db.backref("clients", lazy=True))
+                               backref=db.backref("client", lazy=True))
     ano = db.Column(db.Integer, db.ForeignKey("agencies.ano"))
 
     def __repr__(self):
