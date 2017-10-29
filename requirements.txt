@@ -8,3 +8,4 @@ Flask-WTF==0.14.2
 gunicorn==19.7.1
 Jinja2==2.9.6
 WTForms==2.1
+pyecharts==0.2.6
