@@ -1,25 +1,4 @@
-
 from . import db
-
-
-class Client(db.Model):
-    __tablename__ = "clients"
-
-    cno = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    cname = db.Column(db.String)
-    csex = db.Column(db.String)
-    cage = db.Column(db.Integer)
-    caddress = db.Column(db.String)
-    cphone = db.Column(db.String)
-    csymptom = db.Column(db.String)
-    cdate = db.Column(db.DateTime)
-    cremark = db.Column(db.String)
-
-    mno = db.Column(db.String, db.ForeignKey("medicines.mno"))
-    ano = db.Column(db.String, db.ForeignKey("agencies.ano"))
-
-    def __repr__(self):
-        return '<Client {}>'.format(self.cno)
 
 
 class Agency(db.Model):
@@ -49,3 +28,23 @@ class Medicine(db.Model):
 
     def __repr__(self):
         return '<Medicine {}>'.format(self.mno)
+
+
+class Client(db.Model):
+    __tablename__ = "clients"
+
+    cno = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    cname = db.Column(db.String)
+    csex = db.Column(db.String)
+    cage = db.Column(db.Integer)
+    caddress = db.Column(db.String)
+    cphone = db.Column(db.String)
+    csymptom = db.Column(db.String)
+    cdate = db.Column(db.DateTime)
+    cremark = db.Column(db.String)
+
+    mno = db.Column(db.String, db.ForeignKey("medicines.mno"))
+    ano = db.Column(db.String, db.ForeignKey("agencies.ano"))
+
+    def __repr__(self):
+        return '<Client {}>'.format(self.cno)
