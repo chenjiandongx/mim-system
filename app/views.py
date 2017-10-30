@@ -84,6 +84,7 @@ def insert_client():
 
         db.session.add(_client)
         db.session.commit()
+        flash("新增顾客成功！")
     return render_template("insert_client.html",
                            title="新增顾客",
                            client_info={
@@ -116,6 +117,7 @@ def insert_agency():
         )
         db.session.add(_agency)
         db.session.commit()
+        flash("新增经办人成功！")
     return render_template("insert_agency.html",
                            title="新增经办人",
                            agency_info={
@@ -143,6 +145,7 @@ def insert_medicine():
 
         db.session.add(_medicine)
         db.session.commit()
+        flash("新增药品成功！")
     return render_template("insert_medicine.html",
                            title="新增药品",
                            medicine_info={
@@ -203,6 +206,7 @@ def edit_client(id):
 
         db.session.add(_client)
         db.session.commit()
+        flash("更新顾客信息成功！")
     return render_template("insert_client.html",
                            title="编辑顾客信息",
                            client_info={
@@ -244,6 +248,7 @@ def edit_agency(id):
 
         db.session.add(_agency)
         db.session.commit()
+        flash("新增经办人信息成功！")
     return render_template("insert_agency.html",
                            title="编辑经办人信息",
                            agency_info={
@@ -277,6 +282,7 @@ def edit_medicine(id):
 
         db.session.add(_medicine)
         db.session.commit()
+        flash("新增药品信息成功！")
     return render_template("insert_medicine.html",
                            title="编辑药品信息",
                            medicine_info={
