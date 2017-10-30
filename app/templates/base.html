@@ -4,6 +4,7 @@
 {% block title %}医药管理信息系统 - {{ title }}{% endblock %}
 {% block head %}
     {{super()}}
+    <link rel="icon" href="{{ url_for('static', filename='fav.ico') }}" type="image/x-coin">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
 {% endblock %}
 
