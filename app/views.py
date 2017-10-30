@@ -248,7 +248,7 @@ def edit_agency(id):
 
         db.session.add(_agency)
         db.session.commit()
-        flash("新增经办人信息成功！")
+        flash("更新经办人信息成功！")
     return render_template("insert_agency.html",
                            title="编辑经办人信息",
                            agency_info={
@@ -282,7 +282,7 @@ def edit_medicine(id):
 
         db.session.add(_medicine)
         db.session.commit()
-        flash("新增药品信息成功！")
+        flash("更新药品信息成功！")
     return render_template("insert_medicine.html",
                            title="编辑药品信息",
                            medicine_info={
