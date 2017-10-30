@@ -43,6 +43,7 @@ def logout():
 
 
 @app.route("/insert-client", methods=["POST", "GET"])
+@login_required
 def insert_client():
     """ 新增客户
     """
@@ -98,6 +99,7 @@ def insert_client():
 
 
 @app.route("/insert-agency", methods=["POST", "GET"])
+@login_required
 def insert_agency():
     """ 新增经办人
     """
@@ -125,6 +127,7 @@ def insert_agency():
 
 
 @app.route("/insert-medicine", methods=["POST", "GET"])
+@login_required
 def insert_medicine():
     """ 新增药品
     """
@@ -150,6 +153,7 @@ def insert_medicine():
 
 
 @app.route("/insert-client/<int:id>", methods=["POST", "GET"])
+@login_required
 def edit_client(id):
     """ 编辑客户
 
@@ -215,6 +219,7 @@ def edit_client(id):
 
 
 @app.route("/insert-agency/<int:id>", methods=["POST", "GET"])
+@login_required
 def edit_agency(id):
     """ 编辑经办人
 
@@ -250,6 +255,7 @@ def edit_agency(id):
 
 
 @app.route("/edit-medicine/<int:id>", methods=["POST", "GET"])
+@login_required
 def edit_medicine(id):
     """ 编辑药品
 
@@ -281,6 +287,7 @@ def edit_medicine(id):
 
 
 @app.route("/query-client", methods=["POST", "GET"])
+@login_required
 def query_client():
     """ 查询客户
     """
@@ -298,6 +305,7 @@ def query_client():
 
 
 @app.route("/query-agency", methods=["POST", "GET"])
+@login_required
 def query_agency():
     """ 查询经办人
     """
@@ -315,6 +323,7 @@ def query_agency():
 
 
 @app.route("/query-medicine", methods=["POST", "GET"])
+@login_required
 def query_medicine():
     """ 查询药品
     """
@@ -333,6 +342,7 @@ def query_medicine():
 
 
 @app.route("/delete-client/<int:id>")
+@login_required
 def delete_client(id):
     """ 删除客户
 
@@ -346,6 +356,7 @@ def delete_client(id):
 
 
 @app.route("/delete-agency/<int:id>")
+@login_required
 def delete_agency(id):
     """ 删除经办人
 
@@ -362,6 +373,7 @@ def delete_agency(id):
 
 
 @app.route("/delete-medicine/<int:id>")
+@login_required
 def delete_medicine(id):
     """ 删除药品
 
@@ -377,6 +389,7 @@ def delete_medicine(id):
 
 
 @app.route("/data-statistics")
+@login_required
 def data_statistics():
     """ 数据统计
     """
@@ -386,7 +399,7 @@ def data_statistics():
 
     line = Line("数据统计折线图", width=1100, height=550)
     line.add("", ["药品数", "经办人数", "顾客数"],
-             [mcount, acount, ccount], is_more_utils=True)
+             [mcount, acount, ccount], is_more_utils=True, is_label_show=True)
     return render_template('pyecharts.html',
                            myechart=line.render_embed(),
                            script_list=line.get_js_dependencies())
