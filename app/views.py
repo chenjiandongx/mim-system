@@ -59,11 +59,23 @@ def insert_client():
         caddress = request.values.get("caddress")
         cphone = request.values.get("cphone")
         csymptom = request.values.get("csymptom")
+
         ano = request.values.get("ano")
+        try:
+            _ano = int(ano)
+        except:
+            flash(ano + "：编号应为整数数字！")
+            return redirect(url_for("insert_client"))
         if Agency.query.filter_by(ano=ano).first() is None:
             flash(ano + "：该经办人编号不存在！")
             return redirect(url_for("insert_client"))
+
         mno = request.values.get("mno")
+        try:
+            _mno = int(mno)
+        except:
+            flash(mno + "：编号应为整数数字！")
+            return redirect(url_for("insert_client"))
         if Medicine.query.filter_by(mno=mno).first() is None:
             flash(mno + "：该药品编号不存在！")
             return redirect(url_for("insert_client"))
@@ -81,10 +93,12 @@ def insert_client():
             mno=mno,
             cremark=cremark
         )
-
-        db.session.add(_client)
-        db.session.commit()
-        flash("新增顾客成功！")
+        try:
+            db.session.add(_client)
+            db.session.commit()
+            flash("新增顾客成功！")
+        except:
+            flash("新增顾客失败！")
     return render_template("insert_client.html",
                            title="新增顾客",
                            client_info={
@@ -115,9 +129,12 @@ def insert_agency():
             aphone=aphone,
             aremark=aremark
         )
-        db.session.add(_agency)
-        db.session.commit()
-        flash("新增经办人成功！")
+        try:
+            db.session.add(_agency)
+            db.session.commit()
+            flash("新增经办人成功！")
+        except:
+            flash("新增经办人失败！")
     return render_template("insert_agency.html",
                            title="新增经办人",
                            agency_info={
@@ -142,10 +159,12 @@ def insert_medicine():
             mmode=mmode,
             mefficacy=mefficacy
         )
-
-        db.session.add(_medicine)
-        db.session.commit()
-        flash("新增药品成功！")
+        try:
+            db.session.add(_medicine)
+            db.session.commit()
+            flash("新增药品成功！")
+        except:
+            flash("新增药品失败！")
     return render_template("insert_medicine.html",
                            title="新增药品",
                            medicine_info={
@@ -203,10 +222,12 @@ def edit_client(id):
         _client.ano = ano
         _client.mno = mno
         _client.cremark = cremark
-
-        db.session.add(_client)
-        db.session.commit()
-        flash("更新顾客信息成功！")
+        try:
+            db.session.add(_client)
+            db.session.commit()
+            flash("更新顾客信息成功！")
+        except:
+            flash("更新顾客信息失败！")
     return render_template("insert_client.html",
                            title="编辑顾客信息",
                            client_info={
@@ -245,10 +266,12 @@ def edit_agency(id):
         _agency.asex = asex
         _agency.aphone = aphone
         _agency.aremark = aremark
-
-        db.session.add(_agency)
-        db.session.commit()
-        flash("更新经办人信息成功！")
+        try:
+            db.session.add(_agency)
+            db.session.commit()
+            flash("更新经办人信息成功！")
+        except:
+            flash("更新经办人信息失败！")
     return render_template("insert_agency.html",
                            title="编辑经办人信息",
                            agency_info={
@@ -279,10 +302,12 @@ def edit_medicine(id):
         _medicine.mname = mname
         _medicine.mmode = mmode
         _medicine.mefficacy = mefficacy
-
-        db.session.add(_medicine)
-        db.session.commit()
-        flash("更新药品信息成功！")
+        try:
+            db.session.add(_medicine)
+            db.session.commit()
+            flash("更新药品信息成功！")
+        except:
+            flash("更新药品信息失败！")
     return render_template("insert_medicine.html",
                            title="编辑药品信息",
                            medicine_info={
