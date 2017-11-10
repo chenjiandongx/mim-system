@@ -3,7 +3,6 @@ import datetime
 
 from flask import render_template, url_for, request, flash, redirect
 from flask_login import login_user, login_required, logout_user
-from app.config import FLASK_ADMIN_USERNAME, FLASK_ADMIN_PASSWORD
 from pyecharts import Line
 from . import app, db
 from .models import Medicine, Agency, Client
