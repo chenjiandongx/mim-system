@@ -1,7 +1,7 @@
 
 # mim-system 简介
 ### (Medical information management system) 医疗信息管理系统
-本系统为本学期数据库课程设计作业，主要模拟系统后台对数据进行管理的操作。数据库使用的是 sqlite，网站总体使用的是 [Flask](http://flask.pocoo.org/Flask) [Bootstrap](http://getbootstrap.com)，并部署在 [Heroku](https://www.heroku.com)
+本系统为本学期数据库课程设计作业，主要模拟系统后台对数据进行管理的操作。数据库使用的是 sqlite，网站总体使用的是 [Flask](http://flask.pocoo.org/Flask) + [Bootstrap](http://getbootstrap.com)，并部署在 [Heroku](https://www.heroku.com)
 
 #### 网站预览
 
