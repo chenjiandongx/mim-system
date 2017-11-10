@@ -25,3 +25,11 @@
 * 信息浏览功能模块：浏览顾客、经办人、药品信息
 * 数据报表功能模块：查看顾客、经办人、药品报表信息（使用图形表示）
 * 用户管理与用户登陆功能模块
+
+#### 本地运行方式
+
+0. 执行 `git clone https://github.com/chenjiandongx/mim-system.git` 克隆项目到本地
+1. 新建虚拟环境并激活，切换到项目根目录
+2. 执行 `pip install -r requirements.txt` 安装依赖文件
+3. 执行 `python manage.py runserver` 运行项目
+4. 用浏览器打开 `http://localhost:5000`
