@@ -23,8 +23,10 @@ def login():
     """
     form = LoginForm()
     if form.validate_on_submit():
-        if form.username.data == os.environ.get('FLASK_ADMIN_USERNAME') and \
-           form.password.data == os.environ.get('FLASK_ADMIN_PASSWORD'):
+        FLASK_ADMIN_USERNAME = os.environ.get('FLASK_ADMIN_USERNAME')
+        FLASK_ADMIN_PASSWORD = os.environ.get('FLASK_ADMIN_PASSWORD')
+        if form.username.data == FLASK_ADMIN_USERNAME and \
+           form.password.data == FLASK_ADMIN_PASSWORD:
             login_user(user=User(FLASK_ADMIN_USERNAME), remember=True)
             return redirect(url_for("home"))
         flash("账号或密码错误！")
