@@ -15,7 +15,7 @@ Flask-SQLAlchemy==2.2
 Flask-WTF==0.14.2
 ForgeryPy==0.1
 gunicorn==19.7.1
-httpie==0.9.9
+httpie==1.0.3
 idna==2.6
 itsdangerous==0.24
 Jinja2==2.9.6
